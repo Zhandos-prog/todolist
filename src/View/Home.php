@@ -5,7 +5,7 @@ namespace App\View;
 class Home extends Base {
 
     public function container($data = [])
-    {
+    { 
         ?>
             <?php $this->header(); //print_r($data);die; ?>
 
@@ -26,7 +26,6 @@ class Home extends Base {
                 <div class="d-flex justify-content-between">
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Create Todo</button>
                   <div class="col-sm-3">
-                  
                     <form action="" method="get">
                      <select name="sort" class="form-control" id="sort">
                         <option value="default" <?php if (@$_GET['sort'] == 'default') echo 'selected'; ?>>Default</option>
@@ -118,16 +117,22 @@ class Home extends Base {
                     <form action="/add-task" method="post">
                       <div class="modal-body">
                           <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Name</label>
+                            <label for="recipient-name" class="col-form-label">Name<span class="req"> *</span></label>
+                            
                             <input type="text" name="name" class="form-control" id="recipient-name">
+                            <input type="hidden" name="token" value="<?php echo $data['token']; ?>">
+                            <span class="prompt">Min 2, max 40</span>
                           </div>
+                          
                           <div class="form-group">
-                            <label for="recipient-email" class="col-form-label">Email</label>
+                            <label for="recipient-email" class="col-form-label">Email<span class="req"> *</span></label>
                             <input type="email" name="email" class="form-control" id="recipient-email">
+                            <span class="prompt">Example: vasya@mail.ru</span>
                           </div>
                           <div class="form-group">
-                            <label for="message-text" class="col-form-label">Task</label>
+                            <label for="message-text" class="col-form-label">Task<span class="req"> *</span></label>
                             <textarea name="task" class="form-control" id="message-text"></textarea>
+                            <span class="prompt">Min 20, max 500</span>
                           </div>
                       </div>
                       <div class="modal-footer">
@@ -157,6 +162,7 @@ class Home extends Base {
                           <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Name</label>
                             <input type="text" name="name" class="form-control" required>
+                            <input type="hidden" name="token" value="<?php echo $data['token']; ?>">
                           </div>
                           <div class="form-group">
                             <label for="recipient-password" class="col-form-label">Password</label>

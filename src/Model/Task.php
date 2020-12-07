@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Model;
-use \PDO;
 class Task {
 
     public function add_task(array $data)  // добавляем таск
@@ -14,7 +13,7 @@ class Task {
                 `name`,
                 `email`,
                 `task`,
-                `status`
+                `status`,
                 `admin_edit`
                 )
                 VALUES (

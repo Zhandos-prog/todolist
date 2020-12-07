@@ -70,7 +70,7 @@ abstract class Base {
        <footer class="text-muted">
             <div class="container">
                 <p class="float-right">
-                <a href="#">#GitHub</a>
+                <a href="https://github.com/Zhandos-prog/todolist">#GitHub</a>
                 </p>
                 <p>TodoList 2020</p>
             </div>

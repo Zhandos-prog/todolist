@@ -15,17 +15,21 @@ class Task extends Base {
                         
                             <form action="/update-task" method="post">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Name</label>
+                                    <label for="exampleInputEmail1">Name<span class="req"> *</span></label>
                                     <input type="text" value="<?php echo $data['name'] ?>" name="name" class="form-control">
                                     <input type="hidden" value="<?php echo $data['id'] ?>" name="id" class="form-control">
+                                    <input type="hidden" name="token" value="<?php echo $data['token']; ?>">
+                                    <span class="prompt">Min 2, max 40</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Email</label>
+                                    <label for="exampleInputEmail1">Email<span class="req"> *</span></label>
                                     <input type="email" value="<?php echo $data['email'] ?>" name="email" class="form-control">
+                                    <span class="prompt">Example: vasya@mail.ru</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="message-text" class="col-form-label">Task</label>
+                                    <label for="message-text" class="col-form-label">Task<span class="req"> *</span></label>
                                     <textarea name="task"  class="form-control"><?php echo $data['task'] ?></textarea>
+                                    <span class="prompt">Min 20, max 500</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Status</label>

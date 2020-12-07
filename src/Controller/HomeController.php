@@ -5,12 +5,13 @@ use App\Middleware\Authenticate;
 use App\Controller\Errors;
 
 class HomeController {
-
+    
     private $limit = 3;
     private $pageCount = 0;
 
     public function show_home()
     {
+        
         $sort_list = [
             'name' => '`name`',
             'email' => '`email`',
@@ -37,6 +38,7 @@ class HomeController {
             Errors::show_error_page();
             die;
         }
+        $data['token'] = Authenticate::csrf();
         $data['page'] = $this->pageCount;
         $data['tasks'] = $model->get_tasks($this->limit, $offset, $sort_table);
         $view = new \App\View\Home();
@@ -52,7 +54,7 @@ class HomeController {
             $data = $model->get_task($id);
         }
         
-
+        $data['token'] = Authenticate::csrf();
         $view = new \App\View\Task();
         $view->render($data);
         

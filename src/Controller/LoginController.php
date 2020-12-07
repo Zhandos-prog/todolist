@@ -1,29 +1,36 @@
 <?php
 
 namespace App\Controller;
-
+use App\Middleware\Authenticate;
 class LoginController {
 
     private $data = [];
 
+
     public function auth()
     {
         if ($_POST) {
-            $name = $_POST['name'];
-            $password = $_POST['password'];
+            if (!empty($_POST['token']) && Authenticate::token_match($_POST['token']) == true) {
 
-            $this->data = [
-                'name'=>$name,
-                'password'=>$password,
-            ];
+                $name = trim($_POST['name']);
+                $password = trim($_POST['password']);
 
-            $model = new \App\Model\User();
-            $user = $model->auth($this->data);
-            if ($user) {
-                $_SESSION['auth'] = $user;
-                header('Location: /');
+                $this->data = [
+                    'name'=>$name,
+                    'password'=>$password,
+                ];
+
+                $model = new \App\Model\User();
+                $user = $model->auth($this->data);
+                if ($user) {
+                    $_SESSION['auth'] = $user;
+                    header('Location: /');
+                }else {
+                    $_SESSION['error'] = 'Пользователь не найден!';
+                    header('Location: /');
+                }
             }else {
-                $_SESSION['error'] = 'Пользователь не найден!';
+                $_SESSION['error'] = 'Что-то пошло не так! Попробуйте снова!';
                 header('Location: /');
             }
         }
